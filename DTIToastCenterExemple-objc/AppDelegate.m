@@ -1,20 +1,20 @@
 //
 //  AppDelegate.m
-//  SampleDTIToastCenter
+//  DTIToastCenterExemple-objc
 //
-//  Created by dtissera on 29/08/2014.
-//  Copyright (c) 2014 o--O--o. All rights reserved.
+//  Created by dtissera on 26/10/2014.
+//  Copyright (c) 2014 dtissera. All rights reserved.
 //
 
 #import "AppDelegate.h"
-#import "SampleDTIToastCenter-Swift.h"
+#import <DTIToastCenter/DTIToastCenter-Swift.h>
 
 @interface AppDelegate ()
 
 @end
 
 @implementation AppDelegate
-            
+
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.

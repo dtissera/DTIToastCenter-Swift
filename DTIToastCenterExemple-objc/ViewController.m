@@ -1,13 +1,13 @@
 //
 //  ViewController.m
-//  SampleDTIToastCenter
+//  DTIToastCenterExemple-objc
 //
-//  Created by dtissera on 29/08/2014.
-//  Copyright (c) 2014 o--O--o. All rights reserved.
+//  Created by dtissera on 26/10/2014.
+//  Copyright (c) 2014 dtissera. All rights reserved.
 //
 
 #import "ViewController.h"
-#import "SampleDTIToastCenter-Swift.h"
+#import <DTIToastCenter/DTIToastCenter-Swift.h>
 
 @interface ViewController () {
     UITextField *textField;
@@ -16,14 +16,10 @@
 - (void)displayKeyboard;
 - (void)hideKeyboard;
 
-- (IBAction)actionToasts:(id)sender;
-- (IBAction)actionToastMe:(id)sender;
-- (IBAction)actionToastMeLong:(id)sender;
-
 @end
 
 @implementation ViewController
-            
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.

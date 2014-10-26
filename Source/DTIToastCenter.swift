@@ -11,7 +11,7 @@ import UIKit
 private let _defaultCenter = DTIToastCenter()
 
 @objc
-class DTIToastCenter: NSObject {
+public class DTIToastCenter: NSObject {
     /** DTIToast inner class */
     class DTIToast {
         var message: String?
@@ -130,24 +130,24 @@ class DTIToastCenter: NSObject {
 
 
     /** public methods */
-    class var defaultCenter: DTIToastCenter {
+    public class var defaultCenter: DTIToastCenter {
         return _defaultCenter
     }
     
-    func registerCenter() {
+    public func registerCenter() {
         // force register toast center to oberserve keyboard
         self.registered = true
     }
 
-    func makeText(text: String?, image: UIImage?) {
+    public func makeText(text: String?, image: UIImage?) {
         make(message: text, image: nil)
     }
 
-    func makeText(text: String) {
+    public func makeText(text: String) {
         make(message: text, image: nil)
     }
 
-    func makeImage(image: UIImage) {
+    public func makeImage(image: UIImage) {
         make(message: nil, image: image)
     }
 
