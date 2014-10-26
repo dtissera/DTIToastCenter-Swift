@@ -9,11 +9,17 @@
 import UIKit
 
 extension CGRect {
+    func swip() -> CGRect {
+        var f: CGRect = self
+        f.origin = CGPoint(x: f.origin.y, y: f.origin.x)
+        f.size = CGSize(width: f.size.height, height: f.size.width)
+        return f
+    }
+    
     func swipFromOrientation(orientation: UIInterfaceOrientation) -> CGRect {
         var f: CGRect = self
         if (UIInterfaceOrientationIsLandscape(orientation)) {
-            f.origin = CGPoint(x: f.origin.y, y: f.origin.x)
-            f.size = CGSize(width: f.size.height, height: f.size.width);
+            f = f.swip()
         }
         return f
     }

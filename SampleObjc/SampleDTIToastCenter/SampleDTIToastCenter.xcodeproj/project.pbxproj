@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2583A72C19FC3D0A00B56AA1 /* String+DTI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2583A72B19FC3D0A00B56AA1 /* String+DTI.swift */; };
 		2587E3DE19B1134200512AFC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2587E3DD19B1134200512AFC /* main.m */; };
 		2587E3E119B1134200512AFC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2587E3E019B1134200512AFC /* AppDelegate.m */; };
 		2587E3E419B1134200512AFC /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2587E3E319B1134200512AFC /* ViewController.m */; };
@@ -29,6 +30,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2583A72B19FC3D0A00B56AA1 /* String+DTI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+DTI.swift"; sourceTree = "<group>"; };
 		2587E3D819B1134200512AFC /* SampleDTIToastCenter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SampleDTIToastCenter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2587E3DC19B1134200512AFC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2587E3DD19B1134200512AFC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 				2587E40D19B1190500512AFC /* CGRect+DTI.swift */,
 				2587E40E19B1190500512AFC /* DTIToastCenter.swift */,
 				2587E40F19B1190500512AFC /* DTIToastView.swift */,
+				2583A72B19FC3D0A00B56AA1 /* String+DTI.swift */,
 			);
 			name = Classes;
 			path = ../../../Classes;
@@ -241,6 +244,7 @@
 				2587E3E119B1134200512AFC /* AppDelegate.m in Sources */,
 				2587E41119B1190500512AFC /* DTIToastCenter.swift in Sources */,
 				2587E3DE19B1134200512AFC /* main.m in Sources */,
+				2583A72C19FC3D0A00B56AA1 /* String+DTI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -432,6 +436,7 @@
 				2587E3FA19B1134300512AFC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2587E3FB19B1134300512AFC /* Build configuration list for PBXNativeTarget "SampleDTIToastCenterTests" */ = {
 			isa = XCConfigurationList;
@@ -440,6 +445,7 @@
 				2587E3FD19B1134300512AFC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
