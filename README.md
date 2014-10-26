@@ -7,6 +7,7 @@ Toasts are bounded to keyWindow, handle screen rotation and resize/move when key
 Center is inspired from Takpku library
 Center can be called from both swift or objc project.
 Some functionnalities have been inspired from TKAlertCenter (tapku library)
+DTIToastCenter-Swift required IOS7 & more.
 
 Warning !
 Simulator dont handle correctly view rotations when binded to keyWindow, so to test this functionnality you need to use a physical device.
@@ -22,7 +23,7 @@ For instance, you will have to manually copy Classes/* in your project.
 You can see work progress here:
 https://github.com/CocoaPods/CocoaPods/issues/2272
 
-This component require **Xcode6-Beta6** to compile.
+This component require **Xcode6.1** to compile.
 
 ### Usage
 
