@@ -1,13 +1,11 @@
 DTIToastCenter-Swift
 ====================
 
-A toast center for displaying quick toast to the user written in full swift.
-Toasts are displayed with great animation.
-Toasts are bounded to keyWindow, handle screen rotation and resize/move when keyboard is shown/hidden.
-Center is inspired from Takpku library
-Center can be called from both swift or objc project.
-Some functionnalities have been inspired from TKAlertCenter (tapku library)
-This component require **Xcode6.1** to compile.
+A toast center inspired from TKAlertCenter (tapku library) for displaying quick toast to the user written in full swift with great animation.
+> Toasts are bounded to keyWindow to handle screen rotation and resize/move when keyboard is shown/hidden.
+
+- [x] Center can be called from both swift or objc project.
+- [x] This component require **Xcode6.1** to compile.
 
 <img src="Shots/toastcenter.gif"/> &nbsp; 
 
@@ -31,7 +29,7 @@ _Due to the current lack of [proper infrastructure](http://cocoapods.org) for Sw
 
 Initialize center in your application delegate to listen keyboard events
 
-*objc*
+## objc
 ```objc
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
