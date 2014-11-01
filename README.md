@@ -22,6 +22,7 @@ _Due to the current lack of [proper infrastructure](http://cocoapods.org) for Sw
 5. In the tab bar at the top of that window, open the "Build Phases" panel.
 6. Expand the "Target Dependencies" group, and add `DTIToastCenter.framework`.
 7. Click on the `+` button at the top left of the panel and select "New Copy Files Phase". Rename this new phase to "Copy Frameworks", set the "Destination" to "Frameworks", and add `DTIToastCenter.framework`.
+8. If you are using this component in an `objc target`, flag ```Embedded Content Contains Swift Code``` in the `Build Settings` needs to be set to `YES`.
 
 ---
 
