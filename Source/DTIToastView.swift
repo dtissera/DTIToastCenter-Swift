@@ -50,6 +50,7 @@ class DTIToastView: UIView {
         self.label.textAlignment = NSTextAlignment.Center
 
         self.imageView.contentMode = UIViewContentMode.ScaleAspectFit
+        self.imageView.tintColor = UIColor.whiteColor()
         self.addSubview(self.label)
         self.addSubview(self.imageView)
     }

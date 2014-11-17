@@ -140,7 +140,7 @@ public class DTIToastCenter: NSObject {
     }
 
     public func makeText(text: String?, image: UIImage?) {
-        make(message: text, image: nil)
+        make(message: text, image: image)
     }
 
     public func makeText(text: String) {
