@@ -159,7 +159,7 @@ public class DTIToastCenter: NSObject {
 extension DTIToastCenter {
     func keyboardWillAppear(notification: NSNotification) {
         let userInfo: NSDictionary = notification.userInfo! as NSDictionary;
-        let value: NSValue = userInfo[UIKeyboardFrameEndUserInfoKey] as NSValue
+        let value: NSValue = userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue
         self.keyboardFrame = value.CGRectValue()
         
         var windowFrame = self.availableScreenFrame(orientation: nil)
@@ -193,7 +193,7 @@ extension DTIToastCenter {
     
     func orientationWillChange(notification: NSNotification) {
         let userInfo: NSDictionary = notification.userInfo! as NSDictionary;
-        let value: NSNumber = userInfo[UIApplicationStatusBarOrientationUserInfoKey] as NSNumber
+        let value: NSNumber = userInfo[UIApplicationStatusBarOrientationUserInfoKey] as! NSNumber
         
         let orientation: UIInterfaceOrientation = UIInterfaceOrientation(rawValue: Int(value.intValue))!
 
