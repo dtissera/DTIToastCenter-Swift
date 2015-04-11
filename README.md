@@ -11,9 +11,37 @@ A toast center inspired from TKAlertCenter (tapku library) for displaying quick 
 
 ### Installation
 
+> **Embedded frameworks require a minimum deployment target of iOS 8 or OS X Mavericks.**
+>
 > For application targets that do not support embedded frameworks, such as iOS 7, DTIToastCenter can be integrated by including the `*.swift` source files directly.
 
-_Due to the current lack of [proper infrastructure](http://cocoapods.org) for Swift dependency management, using DTIToastCenter in your project requires the following steps:_
+### CocoaPods
+
+[CocoaPods](http://cocoapods.org) is a dependency manager for Cocoa projects.
+
+CocoaPods 0.36 adds supports for Swift and embedded frameworks. You can install it with the following command:
+
+```bash
+$ gem install cocoapods
+```
+
+To integrate DTIToastCenter into your Xcode project using CocoaPods, specify it in your `Podfile`:
+
+```ruby
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '8.0'
+use_frameworks!
+
+pod 'DTIToastCenter', :git => 'https://github.com/dtissera/DTIToastCenter-Swift.git'
+```
+
+Then, run the following command:
+
+```bash
+$ pod install
+```
+
+### Embedded Framework
 
 1. Add DTIToastCenter as a [submodule](http://git-scm.com/docs/git-submodule) by opening the Terminal, `cd`-ing into your top-level project directory, and entering the command `git submodule add https://github.com/dtissera/DTIToastCenter-Swift.git`
 2. Open the `DTIToastCenter` folder, and drag `DTIToastCenter.xcodeproj` into the file navigator of your app project.
