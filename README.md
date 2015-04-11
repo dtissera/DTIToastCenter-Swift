@@ -32,7 +32,8 @@ source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '8.0'
 use_frameworks!
 
-pod 'DTIToastCenter', :git => 'https://github.com/dtissera/DTIToastCenter-Swift.git'
+pod 'DTIToastCenter', '~> 0.1.0' #for swift 1.1
+pod 'DTIToastCenter', '~> 0.2.0' #for swift 1.2
 ```
 
 Then, run the following command:
