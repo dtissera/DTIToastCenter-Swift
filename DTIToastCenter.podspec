@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = 'DTIToastCenter'
-  s.version = '0.0.1'
+  s.version = '0.1.0'
   s.license = 'MIT'
   s.summary = 'A Swift toast center'
   s.homepage = 'https://github.com/dtissera/DTIToastCenter-Swift'
