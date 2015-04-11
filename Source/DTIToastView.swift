@@ -36,7 +36,7 @@ class DTIToastView: UIView {
         }
     }
 
-    override init() {
+    init() {
         let rect = CGRect(x: 0.0, y: 0.0, width: 100.0, height: 100.0)
         super.init(frame: rect)
         
