@@ -119,7 +119,7 @@ public class DTIToastCenter: NSObject {
         }
     }
 
-    private func make(#message: String?, image: UIImage?) {
+    private func make(message message: String?, image: UIImage?) {
         let t = DTIToast(message: message, image: image)
         
         toasts.append(t)
@@ -167,7 +167,7 @@ extension DTIToastCenter {
             windowFrame = windowFrame.swipFromOrientation(self.currentOrientation())
         }
         
-        var center = self.availableScreenFrame(orientation: nil).centerIntegral()
+        let center = self.availableScreenFrame(orientation: nil).centerIntegral()
 
         UIView.beginAnimations(nil, context: nil)
         self.toastView.adjustSize(maxFrame: windowFrame)
@@ -183,7 +183,7 @@ extension DTIToastCenter {
             windowFrame = windowFrame.swipFromOrientation(self.currentOrientation())
         }
 
-        var center = self.availableScreenFrame(orientation: nil).centerIntegral()
+        let center = self.availableScreenFrame(orientation: nil).centerIntegral()
 
         UIView.beginAnimations(nil, context: nil)
         self.toastView.adjustSize(maxFrame: windowFrame)
@@ -240,7 +240,7 @@ extension DTIToastCenter {
     /**
       * calculate available frame depending of keyboard visibility
       */
-    private func availableScreenFrame(#orientation: UIInterfaceOrientation?) -> CGRect {
+    private func availableScreenFrame(orientation orientation: UIInterfaceOrientation?) -> CGRect {
         var res:CGRect = self.keyboardFrame == CGRectZero ? UIScreen.mainScreen().bounds : self.subtractKeyBoardFrameToWindowFrame(windowFrame: UIScreen.mainScreen().bounds, keyboardFrame: self.keyboardFrame)
         if (orientation != nil) {
             // we are in rotating event - keyboard is always hidden
@@ -276,7 +276,7 @@ extension DTIToastCenter {
         return self.rotationFromOrientation(orientation)
     }
 
-    private func subtractKeyBoardFrameToWindowFrame(#windowFrame: CGRect, keyboardFrame: CGRect) -> CGRect {
+    private func subtractKeyBoardFrameToWindowFrame(windowFrame windowFrame: CGRect, keyboardFrame: CGRect) -> CGRect {
         var kf = keyboardFrame
         if (!CGPointEqualToPoint(CGPointZero, kf.origin)) {
             if (kf.origin.x > 0) {
