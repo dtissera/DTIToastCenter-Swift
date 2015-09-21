@@ -66,7 +66,7 @@ class DTIToastView: UIView {
         var rect = CGRectZero
         rect.size = imageSize
         
-        self.imageView.frame = CGRect(origin: CGPoint(x: self.bounds.centerXInRect(rect).origin.x, y: self.verticalPadding), size: imageSize).integerRect
+        self.imageView.frame = CGRect(origin: CGPoint(x: self.bounds.centerXInRect(rect).origin.x, y: self.verticalPadding), size: imageSize).integral
 
         // calculate text size
         let textSize = self.textSize(imageSize: imageSize)
@@ -77,7 +77,7 @@ class DTIToastView: UIView {
         if (imageSize != CGSizeZero) {
             imageAdjustment += self.imageSpacer + imageSize.height
         }
-        self.label.frame = CGRect(origin: CGPoint(x: self.bounds.centerXInRect(rect).origin.x, y: self.verticalPadding+imageAdjustment), size: textSize).integerRect
+        self.label.frame = CGRect(origin: CGPoint(x: self.bounds.centerXInRect(rect).origin.x, y: self.verticalPadding+imageAdjustment), size: textSize).integral
     }
     
     func maxViewSize() -> CGSize {

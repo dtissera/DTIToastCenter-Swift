@@ -102,7 +102,7 @@ public class DTIToastCenter: NSObject {
         }) { (Bool) -> Void in
             var delay: NSTimeInterval = self.toastDefaultDelay
             if (toast.message != nil) {
-                var words = toast.message!.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+                let words = toast.message!.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
                 // avg person reads 200 words per minute - max 3s
                 delay = NSTimeInterval(min(max(self.toastDefaultDelay, Double(words.count)*60.0/200.0), 5.0))
             }
