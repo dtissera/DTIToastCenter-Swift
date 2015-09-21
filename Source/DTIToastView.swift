@@ -66,7 +66,7 @@ class DTIToastView: UIView {
         var rect = CGRectZero
         rect.size = imageSize
         
-        self.imageView.frame = CGRect(origin: CGPoint(x: self.bounds.centerXInRect(rect).origin.x, y: self.verticalPadding), size: imageSize).integerRect
+        self.imageView.frame = CGRect(origin: CGPoint(x: self.bounds.centerXInRect(rect).origin.x, y: self.verticalPadding), size: imageSize).integral
 
         // calculate text size
         let textSize = self.textSize(imageSize: imageSize)
@@ -77,7 +77,7 @@ class DTIToastView: UIView {
         if (imageSize != CGSizeZero) {
             imageAdjustment += self.imageSpacer + imageSize.height
         }
-        self.label.frame = CGRect(origin: CGPoint(x: self.bounds.centerXInRect(rect).origin.x, y: self.verticalPadding+imageAdjustment), size: textSize).integerRect
+        self.label.frame = CGRect(origin: CGPoint(x: self.bounds.centerXInRect(rect).origin.x, y: self.verticalPadding+imageAdjustment), size: textSize).integral
     }
     
     func maxViewSize() -> CGSize {
@@ -102,7 +102,7 @@ class DTIToastView: UIView {
         return imageSize
     }
     
-    func textSize(#imageSize: CGSize) -> CGSize {
+    func textSize(imageSize imageSize: CGSize) -> CGSize {
         var messageSize = CGSizeZero
         if (self.message != nil) {
             let maxViewSize = self.maxViewSize()
@@ -119,18 +119,18 @@ class DTIToastView: UIView {
         return messageSize
     }
     
-    func adjustSize(#maxFrame: CGRect) {
+    func adjustSize(maxFrame maxFrame: CGRect) {
         self.imageView.hidden = self.image == nil
         self.label.hidden = self.message == nil
         self.maxFrameSize = maxFrame.size
 
         // calculate image size
-        var imageSize = self.imageSize()
+        let imageSize = self.imageSize()
         
         var rect = CGRectZero
         rect.size = imageSize
         
-        let imageViewFrame = CGRect(origin: CGPoint(x: 0.0, y: self.verticalPadding), size: imageSize).integerRect
+        // let imageViewFrame = CGRect(origin: CGPoint(x: 0.0, y: self.verticalPadding), size: imageSize).integerRect
 
         // calculate text size
         let textSize = self.textSize(imageSize: imageSize)
@@ -141,7 +141,7 @@ class DTIToastView: UIView {
         if (imageSize != CGSizeZero) {
             imageAdjustment += self.imageSpacer + imageSize.height
         }
-        let textFrame = CGRect(origin: CGPoint(x: 0.0, y: self.verticalPadding+imageAdjustment), size: textSize).integerRect
+        // let textFrame = CGRect(origin: CGPoint(x: 0.0, y: self.verticalPadding+imageAdjustment), size: textSize).integerRect
 
         // calculate view size
         self.bounds = CGRect(x: 0.0, y: 0.0,
