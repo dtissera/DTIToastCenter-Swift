@@ -10,14 +10,14 @@ import UIKit
 
 class DTIToastView: UIView {
     /** consts */
-    private let boxPadding: CGFloat = 10.0
-    private let horizontalPadding: CGFloat = 10.0
-    private let verticalPadding: CGFloat = 5.0
-    private let imageSpacer: CGFloat = 7.0
+    fileprivate let boxPadding: CGFloat = 10.0
+    fileprivate let horizontalPadding: CGFloat = 10.0
+    fileprivate let verticalPadding: CGFloat = 5.0
+    fileprivate let imageSpacer: CGFloat = 7.0
     
-    private var label: UILabel = UILabel()
-    private var imageView: UIImageView = UIImageView()
-    private var maxFrameSize: CGSize = CGSize(width: 100.0, height: 100.0)
+    fileprivate var label: UILabel = UILabel()
+    fileprivate var imageView: UIImageView = UIImageView()
+    fileprivate var maxFrameSize: CGSize = CGSize(width: 100.0, height: 100.0)
     
     var image: UIImage? {
         didSet {
@@ -43,14 +43,14 @@ class DTIToastView: UIView {
         self.layer.cornerRadius = 6.0
         
         self.backgroundColor = UIColor(white: 0.0, alpha: 0.8)
-        self.label.font = UIFont.boldSystemFontOfSize(14.0)
-        self.label.textColor = UIColor.whiteColor()
-        self.label.lineBreakMode = NSLineBreakMode.ByTruncatingTail
+        self.label.font = UIFont.boldSystemFont(ofSize: 14.0)
+        self.label.textColor = UIColor.white
+        self.label.lineBreakMode = NSLineBreakMode.byTruncatingTail
         self.label.numberOfLines = 0
-        self.label.textAlignment = NSTextAlignment.Center
+        self.label.textAlignment = NSTextAlignment.center
 
-        self.imageView.contentMode = UIViewContentMode.ScaleAspectFit
-        self.imageView.tintColor = UIColor.whiteColor()
+        self.imageView.contentMode = UIViewContentMode.scaleAspectFit
+        self.imageView.tintColor = UIColor.white
         self.addSubview(self.label)
         self.addSubview(self.imageView)
     }
@@ -63,18 +63,18 @@ class DTIToastView: UIView {
         // calculate image size
         let imageSize = self.imageSize()
         
-        var rect = CGRectZero
+        var rect = CGRect.zero
         rect.size = imageSize
         
         self.imageView.frame = CGRect(origin: CGPoint(x: self.bounds.centerXInRect(rect).origin.x, y: self.verticalPadding), size: imageSize).integral
 
         // calculate text size
         let textSize = self.textSize(imageSize: imageSize)
-        rect = CGRectZero
+        rect = CGRect.zero
         rect.size = self.textSize(imageSize: imageSize)
         
         var imageAdjustment: CGFloat = 0.0
-        if (imageSize != CGSizeZero) {
+        if (imageSize != CGSize.zero) {
             imageAdjustment += self.imageSpacer + imageSize.height
         }
         self.label.frame = CGRect(origin: CGPoint(x: self.bounds.centerXInRect(rect).origin.x, y: self.verticalPadding+imageAdjustment), size: textSize).integral
@@ -82,13 +82,12 @@ class DTIToastView: UIView {
     
     func maxViewSize() -> CGSize {
         // max box size
-        return CGRectInset(CGRect(origin: CGPointZero, size: self.maxFrameSize),
-            boxPadding + self.horizontalPadding,
-            boxPadding + self.verticalPadding).size
+        return CGRect(origin: CGPoint.zero, size: self.maxFrameSize).insetBy(dx: boxPadding + self.horizontalPadding,
+            dy: boxPadding + self.verticalPadding).size
     }
     
     func imageSize() -> CGSize {
-        var imageSize = CGSizeZero
+        var imageSize = CGSize.zero
         if (self.image != nil) {
             imageSize = self.image!.size
             let maxViewSize = self.maxViewSize()
@@ -102,13 +101,12 @@ class DTIToastView: UIView {
         return imageSize
     }
     
-    func textSize(imageSize imageSize: CGSize) -> CGSize {
-        var messageSize = CGSizeZero
+    func textSize(imageSize: CGSize) -> CGSize {
+        var messageSize = CGSize.zero
         if (self.message != nil) {
             let maxViewSize = self.maxViewSize()
-            let maxTextSize = CGRectInset(CGRect(origin: CGPointZero, size: maxViewSize),
-                0.0,
-                imageSize == CGSizeZero ? 0.0 : (imageSize.height+self.imageSpacer)/2.0).size
+            let maxTextSize = CGRect(origin: CGPoint.zero, size: maxViewSize).insetBy(dx: 0.0,
+                dy: imageSize == CGSize.zero ? 0.0 : (imageSize.height+self.imageSpacer)/2.0).size
             
             messageSize = self.label.sizeThatFits(maxTextSize)
             if (messageSize.height > maxTextSize.height) {
@@ -119,26 +117,26 @@ class DTIToastView: UIView {
         return messageSize
     }
     
-    func adjustSize(maxFrame maxFrame: CGRect) {
-        self.imageView.hidden = self.image == nil
-        self.label.hidden = self.message == nil
+    func adjustSize(maxFrame: CGRect) {
+        self.imageView.isHidden = self.image == nil
+        self.label.isHidden = self.message == nil
         self.maxFrameSize = maxFrame.size
 
         // calculate image size
         let imageSize = self.imageSize()
         
-        var rect = CGRectZero
+        var rect = CGRect.zero
         rect.size = imageSize
         
         // let imageViewFrame = CGRect(origin: CGPoint(x: 0.0, y: self.verticalPadding), size: imageSize).integerRect
 
         // calculate text size
         let textSize = self.textSize(imageSize: imageSize)
-        rect = CGRectZero
+        rect = CGRect.zero
         rect.size = self.textSize(imageSize: imageSize)
         
         var imageAdjustment: CGFloat = 0.0
-        if (imageSize != CGSizeZero) {
+        if (imageSize != CGSize.zero) {
             imageAdjustment += self.imageSpacer + imageSize.height
         }
         // let textFrame = CGRect(origin: CGPoint(x: 0.0, y: self.verticalPadding+imageAdjustment), size: textSize).integerRect

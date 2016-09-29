@@ -11,7 +11,7 @@ import UIKit
 private let _defaultCenter = DTIToastCenter()
 
 @objc
-public class DTIToastCenter: NSObject {
+open class DTIToastCenter: NSObject {
     /** DTIToast inner class */
     class DTIToast {
         var message: String?
@@ -32,29 +32,29 @@ public class DTIToastCenter: NSObject {
     }
     
     /** private members */
-    private var toasts = [DTIToast]()
-    private var active = false
-    private var toastView = DTIToastView()
-    private var registered = false
-    private var keyboardFrame: CGRect = CGRectZero
+    fileprivate var toasts = [DTIToast]()
+    fileprivate var active = false
+    fileprivate var toastView = DTIToastView()
+    fileprivate var registered = false
+    fileprivate var keyboardFrame: CGRect = CGRect.zero
 
     /** consts */
-    private let toastDefaultDelay = NSTimeInterval(1.4)
+    fileprivate let toastDefaultDelay = TimeInterval(1.4)
     
     /** overrides */
     override init () {
         super.init()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillAppear:", name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillDisappear:", name: UIKeyboardDidHideNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "orientationWillChange:", name: UIApplicationWillChangeStatusBarOrientationNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(DTIToastCenter.keyboardWillAppear(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(DTIToastCenter.keyboardWillDisappear(_:)), name: NSNotification.Name.UIKeyboardDidHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(DTIToastCenter.orientationWillChange(_:)), name: NSNotification.Name.UIApplicationWillChangeStatusBarOrientation, object: nil)
     }
     
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
     
     /** private methods */
-    private func showToasts() {
+    fileprivate func showToasts() {
         if (!registered) {
             fatalError("DTIToastCenter ~ you need to call register method in your AppDelegate:didFinishLaunchingWithOptions method !")
         }
@@ -67,7 +67,7 @@ public class DTIToastCenter: NSObject {
         
         // Reset toastView
         self.toastView.alpha = 0
-        self.toastView.transform = CGAffineTransformIdentity
+        self.toastView.transform = CGAffineTransform.identity
         
         // Extract top al top
         let toast = self.toasts[0]
@@ -82,32 +82,32 @@ public class DTIToastCenter: NSObject {
         self.toastView.image = toast.image
         self.toastView.adjustSize(maxFrame: windowFrame)
 
-        self.toasts.removeAtIndex(0)
-        UIApplication.sharedApplication().keyWindow!.addSubview(self.toastView)
+        self.toasts.remove(at: 0)
+        UIApplication.shared.keyWindow!.addSubview(self.toastView)
 
-        var transform: CGAffineTransform = CGAffineTransformMakeScale(2.0, 2.0)
+        var transform: CGAffineTransform = CGAffineTransform(scaleX: 2.0, y: 2.0)
         if (self.iosVersionLessThan8()) {
-            transform = CGAffineTransformConcat(self.rotationFromOrientation(), transform)
+            transform = self.rotationFromOrientation().concatenating(transform)
         }
         self.toastView.transform = transform
         self.toastView.center = self.availableScreenFrame(orientation: nil).centerIntegral()
 
-        UIView.animateWithDuration(0.15, animations: { () -> Void in
+        UIView.animate(withDuration: 0.15, animations: { () -> Void in
             self.toastView.alpha = 1;
-            var transform: CGAffineTransform = CGAffineTransformMakeScale(1.0, 1.0)
+            var transform: CGAffineTransform = CGAffineTransform(scaleX: 1.0, y: 1.0)
             if (self.iosVersionLessThan8()) {
-                transform = CGAffineTransformConcat(self.rotationFromOrientation(), transform)
+                transform = self.rotationFromOrientation().concatenating(transform)
             }
             self.toastView.transform = transform
-        }) { (Bool) -> Void in
-            var delay: NSTimeInterval = self.toastDefaultDelay
+        }, completion: { (Bool) -> Void in
+            var delay: TimeInterval = self.toastDefaultDelay
             if (toast.message != nil) {
-                let words = toast.message!.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+                let words = toast.message!.components(separatedBy: CharacterSet.whitespacesAndNewlines)
                 // avg person reads 200 words per minute - max 3s
-                delay = NSTimeInterval(min(max(self.toastDefaultDelay, Double(words.count)*60.0/200.0), 5.0))
+                delay = TimeInterval(min(max(self.toastDefaultDelay, Double(words.count)*60.0/200.0), 5.0))
             }
 
-            UIView.animateWithDuration(0.25, delay: delay, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
+            UIView.animate(withDuration: 0.25, delay: delay, options: UIViewAnimationOptions.curveEaseOut, animations: { () -> Void in
                 if (self.iosVersionLessThan8()) {
                     self.toastView.transform = self.rotationFromOrientation()
                 }
@@ -116,10 +116,10 @@ public class DTIToastCenter: NSObject {
                 self.toastView.removeFromSuperview()
                 self.showToasts()
             })
-        }
+        }) 
     }
 
-    private func make(message message: String?, image: UIImage?) {
+    fileprivate func make(message: String?, image: UIImage?) {
         let t = DTIToast(message: message, image: image)
         
         toasts.append(t)
@@ -130,24 +130,24 @@ public class DTIToastCenter: NSObject {
 
 
     /** public methods */
-    public class var defaultCenter: DTIToastCenter {
+    open class var defaultCenter: DTIToastCenter {
         return _defaultCenter
     }
     
-    public func registerCenter() {
+    open func registerCenter() {
         // force register toast center to oberserve keyboard
         self.registered = true
     }
 
-    public func makeText(text: String?, image: UIImage?) {
+    open func makeText(_ text: String?, image: UIImage?) {
         make(message: text, image: image)
     }
 
-    public func makeText(text: String) {
+    open func makeText(_ text: String) {
         make(message: text, image: nil)
     }
 
-    public func makeImage(image: UIImage) {
+    open func makeImage(_ image: UIImage) {
         make(message: nil, image: image)
     }
 
@@ -157,10 +157,10 @@ public class DTIToastCenter: NSObject {
   * System events // notifications
   */
 extension DTIToastCenter {
-    func keyboardWillAppear(notification: NSNotification) {
-        let userInfo: NSDictionary = notification.userInfo! as NSDictionary;
+    func keyboardWillAppear(_ notification: Notification) {
+        let userInfo: NSDictionary = (notification as NSNotification).userInfo! as NSDictionary;
         let value: NSValue = userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue
-        self.keyboardFrame = value.CGRectValue()
+        self.keyboardFrame = value.cgRectValue
         
         var windowFrame = self.availableScreenFrame(orientation: nil)
         if (self.iosVersionLessThan8()) {
@@ -175,8 +175,8 @@ extension DTIToastCenter {
         UIView.commitAnimations()
     }
     
-    func keyboardWillDisappear(notification: NSNotification) {
-        self.keyboardFrame = CGRectZero
+    func keyboardWillDisappear(_ notification: Notification) {
+        self.keyboardFrame = CGRect.zero
         
         var windowFrame = self.availableScreenFrame(orientation: nil)
         if (self.iosVersionLessThan8()) {
@@ -191,11 +191,11 @@ extension DTIToastCenter {
         UIView.commitAnimations()
     }
     
-    func orientationWillChange(notification: NSNotification) {
-        let userInfo: NSDictionary = notification.userInfo! as NSDictionary;
+    func orientationWillChange(_ notification: Notification) {
+        let userInfo: NSDictionary = (notification as NSNotification).userInfo! as NSDictionary;
         let value: NSNumber = userInfo[UIApplicationStatusBarOrientationUserInfoKey] as! NSNumber
         
-        let orientation: UIInterfaceOrientation = UIInterfaceOrientation(rawValue: Int(value.intValue))!
+        let orientation: UIInterfaceOrientation = UIInterfaceOrientation(rawValue: Int(value.int32Value))!
 
         var toastFrame = self.availableScreenFrame(orientation: orientation)
         var center = toastFrame.centerIntegral() // .swipFromOrientation(orientation)
@@ -203,13 +203,13 @@ extension DTIToastCenter {
             if (UIInterfaceOrientationIsPortrait(orientation)) {
                 toastFrame = toastFrame.swip()
             }
-            center = UIScreen.mainScreen().bounds.centerIntegral()
+            center = UIScreen.main.bounds.centerIntegral()
         }
 
         self.toastView.adjustSize(maxFrame: toastFrame)
 
         UIView.beginAnimations(nil, context: nil)
-        self.toastView.transform = CGAffineTransformIdentity
+        self.toastView.transform = CGAffineTransform.identity
         if (self.iosVersionLessThan8()) {
             self.toastView.transform = self.rotationFromOrientation(orientation)
         }
@@ -225,26 +225,26 @@ extension DTIToastCenter {
     /**
     * ios version < ios8
     */
-    private func iosVersionLessThan8() -> Bool {
-        let os_version: String = UIDevice.currentDevice().systemVersion;
+    fileprivate func iosVersionLessThan8() -> Bool {
+        let os_version: String = UIDevice.current.systemVersion;
         return os_version.doubleValue() < 8.0
     }
 
     /**
       * current orientation of device
       */
-    private func currentOrientation() -> UIInterfaceOrientation {
-        return UIApplication.sharedApplication().statusBarOrientation
+    fileprivate func currentOrientation() -> UIInterfaceOrientation {
+        return UIApplication.shared.statusBarOrientation
     }
 
     /**
       * calculate available frame depending of keyboard visibility
       */
-    private func availableScreenFrame(orientation orientation: UIInterfaceOrientation?) -> CGRect {
-        var res:CGRect = self.keyboardFrame == CGRectZero ? UIScreen.mainScreen().bounds : self.subtractKeyBoardFrameToWindowFrame(windowFrame: UIScreen.mainScreen().bounds, keyboardFrame: self.keyboardFrame)
+    fileprivate func availableScreenFrame(orientation: UIInterfaceOrientation?) -> CGRect {
+        var res:CGRect = self.keyboardFrame == CGRect.zero ? UIScreen.main.bounds : self.subtractKeyBoardFrameToWindowFrame(windowFrame: UIScreen.main.bounds, keyboardFrame: self.keyboardFrame)
         if (orientation != nil) {
             // we are in rotating event - keyboard is always hidden
-            res = UIScreen.mainScreen().bounds.swip()
+            res = UIScreen.main.bounds.swip()
         }
         return res
     }
@@ -252,40 +252,40 @@ extension DTIToastCenter {
     /**
       * return an affine transformation depending of orientation
       */
-    private func rotationFromOrientation(orientation: UIInterfaceOrientation) -> CGAffineTransform {
+    fileprivate func rotationFromOrientation(_ orientation: UIInterfaceOrientation) -> CGAffineTransform {
         var angle: CGFloat = 0.0;
 
-        if (orientation == UIInterfaceOrientation.LandscapeLeft ) {
+        if (orientation == UIInterfaceOrientation.landscapeLeft ) {
             angle = CGFloat(-M_PI_2)
         }
-        else if (orientation == UIInterfaceOrientation.LandscapeRight ) {
+        else if (orientation == UIInterfaceOrientation.landscapeRight ) {
             angle = CGFloat(M_PI_2)
         }
-        else if (orientation == UIInterfaceOrientation.PortraitUpsideDown) {
+        else if (orientation == UIInterfaceOrientation.portraitUpsideDown) {
             angle = CGFloat(M_PI)
         }
-        return CGAffineTransformMakeRotation(angle)
+        return CGAffineTransform(rotationAngle: angle)
     }
 
     /**
       * return an affine transformation depending of orientation
       */
-    private func rotationFromOrientation() -> CGAffineTransform {
-        let orientation: UIInterfaceOrientation = UIApplication.sharedApplication().statusBarOrientation
+    fileprivate func rotationFromOrientation() -> CGAffineTransform {
+        let orientation: UIInterfaceOrientation = UIApplication.shared.statusBarOrientation
 
         return self.rotationFromOrientation(orientation)
     }
 
-    private func subtractKeyBoardFrameToWindowFrame(windowFrame windowFrame: CGRect, keyboardFrame: CGRect) -> CGRect {
+    fileprivate func subtractKeyBoardFrameToWindowFrame(windowFrame: CGRect, keyboardFrame: CGRect) -> CGRect {
         var kf = keyboardFrame
-        if (!CGPointEqualToPoint(CGPointZero, kf.origin)) {
+        if (!CGPoint.zero.equalTo(kf.origin)) {
             if (kf.origin.x > 0) {
                 kf.size.width = kf.origin.x
             }
             if (kf.origin.y > 0) {
                 kf.size.height = kf.origin.y
             }
-            kf.origin = CGPointZero;
+            kf.origin = CGPoint.zero;
         }
         else {
             kf.origin.x = abs(kf.size.width - windowFrame.size.width);
@@ -303,7 +303,7 @@ extension DTIToastCenter {
                 kf.size.height = temp;
             }
         }
-        return CGRectIntersection(windowFrame, kf);
+        return windowFrame.intersection(kf);
     }
     
 
