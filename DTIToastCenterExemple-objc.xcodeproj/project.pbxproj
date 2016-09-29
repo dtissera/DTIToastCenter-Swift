@@ -163,7 +163,10 @@
 				TargetAttributes = {
 					25BCBB8519FD0F64004269D1 = {
 						CreatedOnToolsVersion = 6.1;
+<<<<<<< HEAD
 						DevelopmentTeam = X46L8ZVD54;
+=======
+>>>>>>> origin/swift-3.0
 						LastSwiftMigration = 0800;
 					};
 				};
