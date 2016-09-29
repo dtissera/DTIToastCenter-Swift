@@ -16,7 +16,7 @@ extension CGRect {
         return f
     }
     
-    func swipFromOrientation(orientation: UIInterfaceOrientation) -> CGRect {
+    func swipFromOrientation(_ orientation: UIInterfaceOrientation) -> CGRect {
         var f: CGRect = self
         if (UIInterfaceOrientationIsLandscape(orientation)) {
             f = f.swip()
@@ -26,21 +26,21 @@ extension CGRect {
 
     func centerIntegral() -> CGPoint {
 
-        return CGPoint(x: Int(self.origin.x.isInfinite ? CGFloat(Int.max) : CGRectGetMidX(self)),
-                       y: Int(self.origin.y.isInfinite ? CGFloat(Int.max) : CGRectGetMidY(self)))
+        return CGPoint(x: Int(self.origin.x.isInfinite ? CGFloat(Int.max) : self.midX),
+                       y: Int(self.origin.y.isInfinite ? CGFloat(Int.max) : self.midY))
     }
 
-    func centerInRect(rect: CGRect) -> CGRect {
+    func centerInRect(_ rect: CGRect) -> CGRect {
         let center = self.centerIntegral()
 
-        let origin = CGPoint(x: center.x-CGRectGetWidth(rect)/2.0, y: center.y-CGRectGetHeight(rect)/2.0)
+        let origin = CGPoint(x: center.x-rect.width/2.0, y: center.y-rect.height/2.0)
 
         return CGRect(origin: origin, size: self.size)
     }
 
-    func centerXInRect(rect: CGRect) -> CGRect {
+    func centerXInRect(_ rect: CGRect) -> CGRect {
         let center = self.centerIntegral()
-        let origin = CGPoint(x: center.x-CGRectGetWidth(rect)/2.0, y: self.origin.y)
+        let origin = CGPoint(x: center.x-rect.width/2.0, y: self.origin.y)
 
         return CGRect(origin: origin, size: self.size)
     }
