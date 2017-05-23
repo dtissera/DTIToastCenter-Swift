@@ -256,13 +256,13 @@ extension DTIToastCenter {
         var angle: CGFloat = 0.0;
 
         if (orientation == UIInterfaceOrientation.landscapeLeft ) {
-            angle = CGFloat(-M_PI_2)
+            angle = CGFloat(-(Double.pi/2))
         }
         else if (orientation == UIInterfaceOrientation.landscapeRight ) {
-            angle = CGFloat(M_PI_2)
+            angle = CGFloat(Double.pi/2)
         }
         else if (orientation == UIInterfaceOrientation.portraitUpsideDown) {
-            angle = CGFloat(M_PI)
+            angle = CGFloat(Double.pi/2)
         }
         return CGAffineTransform(rotationAngle: angle)
     }
