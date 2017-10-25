@@ -157,7 +157,7 @@ open class DTIToastCenter: NSObject {
   * System events // notifications
   */
 extension DTIToastCenter {
-    func keyboardWillAppear(_ notification: Notification) {
+    @objc func keyboardWillAppear(_ notification: Notification) {
         let userInfo: NSDictionary = (notification as NSNotification).userInfo! as NSDictionary;
         let value: NSValue = userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue
         self.keyboardFrame = value.cgRectValue
@@ -176,7 +176,7 @@ extension DTIToastCenter {
     }
     
     func keyboardWillDisappear(_ notification: Notification) {
-        self.keyboardFrame = CGRect.zero
+        @objc self.keyboardFrame = CGRect.zero
         
         var windowFrame = self.availableScreenFrame(orientation: nil)
         if (self.iosVersionLessThan8()) {
@@ -191,7 +191,7 @@ extension DTIToastCenter {
         UIView.commitAnimations()
     }
     
-    func orientationWillChange(_ notification: Notification) {
+    @objc func orientationWillChange(_ notification: Notification) {
         let userInfo: NSDictionary = (notification as NSNotification).userInfo! as NSDictionary;
         let value: NSNumber = userInfo[UIApplicationStatusBarOrientationUserInfoKey] as! NSNumber
         
